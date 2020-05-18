@@ -14,28 +14,13 @@ Data::Data() {
 
 /*
 	descr: constructor cu parametrii
-	in: unsigned integer z, unsigned integer l, unsigned interger a
+	in: integer z, integer l, interger a
 	out: entitate data cu parametrii setati
 */
-Data::Data(unsigned int z, unsigned int l, unsigned int a) {
-	if (z > 0 && z <= 31) {
+Data::Data(int z, int l, int a) {
 		this->zi = z;
-	}
-	else {
-		this->zi = 1;
-	}
-	if (l > 0 && l <= 12) {
 		this->luna = l;
-	}
-	else {
-		this->luna = 1;
-	}
-	if (a > 0 && a < 2030) {
 		this->an = a;
-	}
-	else {
-		this->an = 2020;
-	}
 }
 
 /*
@@ -59,36 +44,36 @@ Data::~Data() {}
 /*
 	descr: getter pentru atributul zi
 	in: -
-	out: unsigned integer - atribitul zi al entitatii
+	out: integer - atribitul zi al entitatii
 */
-unsigned int Data::getZi() {
+int Data::getZi() {
 	return zi;
 }
 
 /*
 	descr: getter pentru atributul luna
 	in: -
-	out: unsigned integer - atribitul luna al entitatii
+	out: integer - atribitul luna al entitatii
 */
-unsigned int Data::getLuna() {
+int Data::getLuna() {
 	return luna;
 }
 
 /*
 	descr: getter pentru atributul an
 	in: -
-	out: unsigned integer - atribitul an al entitatii
+	out: integer - atribitul an al entitatii
 */
-unsigned int Data::getAn() {
+int Data::getAn() {
 	return an;
 }
 
 /*
 	descr: setter pentru atribitul zi
-	in: unsigned integer z
+	in: integer z
 	out: -
 */
-void Data::setZi(unsigned int z) {
+void Data::setZi(int z) {
 	if (z > 0 && z <= 31) {
 		zi = z;
 	}
@@ -99,10 +84,10 @@ void Data::setZi(unsigned int z) {
 
 /*
 	descr: setter pentru atribitul luna
-	in: unsigned integer l
+	in: integer l
 	out: -
 */
-void Data::setLuna(unsigned int l) {
+void Data::setLuna(int l) {
 	if (l > 0 && l <= 12) {
 		luna = l;
 	}
@@ -113,10 +98,10 @@ void Data::setLuna(unsigned int l) {
 
 /*
 	descr: setter pentru atribitul an
-	in: unsigned integer a
+	in: integer a
 	out: -
 */
-void Data::setAn(unsigned int a) {
+void Data::setAn(int a) {
 	if (a > 0 && a < 2030) {
 		an = a;
 	}

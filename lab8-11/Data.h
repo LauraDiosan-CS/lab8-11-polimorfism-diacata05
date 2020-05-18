@@ -11,20 +11,20 @@ using namespace std;
 
 class Data {
 private:
-	unsigned int zi;
-	unsigned int luna;
-	unsigned int an;
+	int zi;
+	int luna;
+	int an;
 public:
 	Data();
-	Data(unsigned int z, unsigned int l, unsigned int a);
+	Data(int z, int l, int a);
 	Data(const Data& d);
 	~Data();
-	unsigned int getZi();
-	unsigned int getLuna();
-	unsigned int getAn();
-	void setZi(unsigned int z);
-	void setLuna(unsigned int l);
-	void setAn(unsigned int a);
+	int getZi();
+	int getLuna();
+	int getAn();
+	void setZi(int z);
+	void setLuna(int l);
+	void setAn(int a);
 
 	Data& operator=(const Data& d);
 	bool operator==(const Data& d);

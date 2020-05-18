@@ -1,25 +1,25 @@
-#include "RepoFileTXT.h"
+#include "RepoFileCSV.h"
 
-RepoFileTXT::RepoFileTXT() : RepoFile()
+RepoFileCSV::RepoFileCSV() : RepoFile()
 {
 }
 
-RepoFileTXT::RepoFileTXT(string fileName) : RepoFile(fileName)
+RepoFileCSV::RepoFileCSV(string fileName) : RepoFile(fileName)
 {
 }
 
-RepoFileTXT::~RepoFileTXT()
+RepoFileCSV::~RepoFileCSV()
 {
 }
 
-void RepoFileTXT::loadFromFile()
+void RepoFileCSV::loadFromFile()
 {
 	ifstream f(this->fileName);
 	if (f.is_open())
 	{
 		this->emptyRepo();
 		string linie;
-		string delim = " ";
+		string delim = ",";
 		while (getline(f, linie))
 		{
 			if (linie.substr(0, 1) == "A")
@@ -59,6 +59,7 @@ void RepoFileTXT::loadFromFile()
 				linie = linie.erase(0, pos + 1);
 
 				Animal* a = new Animal(cod, nume, pret, Data(zi, luna, an), varsta, exemplare);
+
 				this->entitati.push_back(a);
 			}
 			else if (linie.substr(0, 1) == "P")
@@ -89,6 +90,10 @@ void RepoFileTXT::loadFromFile()
 				int anI = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
 
+				pos = linie.find(delim);
+				int exemplare = stoi(linie.substr(0, pos));
+				linie = linie.erase(0, pos + 1);
+
 				pos = linie.find("/");
 				int ziE = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
@@ -101,11 +106,7 @@ void RepoFileTXT::loadFromFile()
 				int anE = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
 
-				pos = linie.find(delim);
-				int exemplare = stoi(linie.substr(0, pos));
-				linie = linie.erase(0, pos + 1);
-
-				Produs* p = new Produs(cod, nume, pret, Data(ziI, lunaI, anI), Data(ziE, lunaE, anE), exemplare);
+				Produs* p = new Produs(cod, nume, pret,Data(ziI, lunaI, anI), exemplare, Data(ziE, lunaE, anE));
 				this->entitati.push_back(p);
 			}
 		}
@@ -113,14 +114,14 @@ void RepoFileTXT::loadFromFile()
 	}
 }
 
-void RepoFileTXT::saveToFile()
+void RepoFileCSV::saveToFile()
 {
 	ofstream f(this->fileName);
 	if (f.is_open())
 	{
 		for (Entitate* entitate : this->entitati)
 		{
-			f << entitate->toString(" ") << endl;
+			f << entitate->toString(",") << endl;
 		}
 	}
 }

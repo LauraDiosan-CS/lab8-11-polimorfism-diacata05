@@ -1,25 +1,25 @@
-#include "RepoFileCSV.h"
+#include "RepoFileTXT.h"
 
-RepoFileCSV::RepoFileCSV() : RepoFile()
+RepoFileTXT::RepoFileTXT() : RepoFile()
 {
 }
 
-RepoFileCSV::RepoFileCSV(string fileName) : RepoFile(fileName)
+RepoFileTXT::RepoFileTXT(string fileName) : RepoFile(fileName)
 {
 }
 
-RepoFileCSV::~RepoFileCSV()
+RepoFileTXT::~RepoFileTXT()
 {
 }
 
-void RepoFileCSV::loadFromFile()
+void RepoFileTXT::loadFromFile()
 {
 	ifstream f(this->fileName);
 	if (f.is_open())
 	{
 		this->emptyRepo();
 		string linie;
-		string delim = ",";
+		string delim = " ";
 		while (getline(f, linie))
 		{
 			if (linie.substr(0, 1) == "A")
@@ -59,9 +59,7 @@ void RepoFileCSV::loadFromFile()
 				linie = linie.erase(0, pos + 1);
 
 				Animal* a = new Animal(cod, nume, pret, Data(zi, luna, an), varsta, exemplare);
-
-				//this->entitati.push_back(a);
-				this->entitati.push_front(a);
+				this->entitati.push_back(a);
 			}
 			else if (linie.substr(0, 1) == "P")
 			{
@@ -91,6 +89,10 @@ void RepoFileCSV::loadFromFile()
 				int anI = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
 
+				pos = linie.find(delim);
+				int exemplare = stoi(linie.substr(0, pos));
+				linie = linie.erase(0, pos + 1);
+
 				pos = linie.find("/");
 				int ziE = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
@@ -103,27 +105,22 @@ void RepoFileCSV::loadFromFile()
 				int anE = stoi(linie.substr(0, pos));
 				linie = linie.erase(0, pos + 1);
 
-				pos = linie.find(delim);
-				int exemplare = stoi(linie.substr(0, pos));
-				linie = linie.erase(0, pos + 1);
-
-				Produs* p = new Produs(cod, nume, pret,Data(ziI, lunaI, anI), Data(ziE, lunaE, anE), exemplare);
-				//this->entitati.push_back(p);
-				this->entitati.push_front(p);
+				Produs* p = new Produs(cod, nume, pret, Data(ziI, lunaI, anI), exemplare, Data(ziE, lunaE, anE));
+				this->entitati.push_back(p);
 			}
 		}
 		f.close();
 	}
 }
 
-void RepoFileCSV::saveToFile()
+void RepoFileTXT::saveToFile()
 {
 	ofstream f(this->fileName);
 	if (f.is_open())
 	{
 		for (Entitate* entitate : this->entitati)
 		{
-			f << entitate->toString(",") << endl;
+			f << entitate->toString(" ") << endl;
 		}
 	}
 }

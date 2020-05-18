@@ -2,6 +2,7 @@
 #define ENTITATE_H
 
 #include <string>
+#include "Data.h"
 
 using namespace std;
 
@@ -10,9 +11,11 @@ protected:
 	string cod;
 	string nume;
 	double pret;
+	Data dataIntroducere;
+	int exemplare;
 public:
 	Entitate();
-	Entitate(string cod, string nume, double pret);
+	Entitate(string cod, string nume, double pret, Data dataIntroducere, int exemplare);
 	Entitate(const Entitate& e);
 	~Entitate();
 
@@ -21,10 +24,14 @@ public:
 	string getCod();
 	string getNume();
 	double getPret();
+	Data getDataIntroducere();
+	int getExemplare();
 
 	void setCod(string cod);
 	void setNume(string nume);
 	void setPret(double pret);
+	void setDataIntroducere(Data dataIntroducere);
+	void setExemplare(int exemplare);
 
 	Entitate& operator=(const Entitate& e);
 	bool operator==(const Entitate& e);

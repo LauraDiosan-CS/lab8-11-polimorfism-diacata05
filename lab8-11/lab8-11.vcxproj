@@ -151,21 +151,36 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Entitate.cpp" />
     <ClCompile Include="lab8-11.cpp" />
+    <ClCompile Include="Login.cpp" />
     <ClCompile Include="Produs.cpp" />
     <ClCompile Include="RepoFile.cpp" />
     <ClCompile Include="RepoFileCSV.cpp" />
     <ClCompile Include="RepoFileTXT.cpp" />
+    <ClCompile Include="Service.cpp" />
     <ClCompile Include="Teste.cpp" />
+    <ClCompile Include="Ui.cpp" />
+    <ClCompile Include="ValidatorAnimal.cpp" />
+    <ClCompile Include="ValidatorEntitate.cpp" />
+    <ClCompile Include="ValidatorProdus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Entitate.h" />
+    <ClInclude Include="Login.h" />
+    <ClInclude Include="LoginException.h" />
     <ClInclude Include="Produs.h" />
     <ClInclude Include="RepoFile.h" />
     <ClInclude Include="RepoFileCSV.h" />
     <ClInclude Include="RepoFileTXT.h" />
+    <ClInclude Include="Service.h" />
+    <ClInclude Include="ServiceException.h" />
     <ClInclude Include="Teste.h" />
+    <ClInclude Include="Ui.h" />
+    <ClInclude Include="ValidationException.h" />
+    <ClInclude Include="ValidatorAnimal.h" />
+    <ClInclude Include="ValidatorEntitate.h" />
+    <ClInclude Include="ValidatorProdus.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="entitati.csv" />
@@ -175,6 +190,7 @@
   <ItemGroup>
     <Text Include="entitati.txt" />
     <Text Include="entitati_test.txt" />
+    <Text Include="users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,7 +18,7 @@ void RepoFile::setFileName(string fileName)
 	this->fileName = fileName;
 }
 
-deque<Entitate*> RepoFile::getAll()
+vector<Entitate*> RepoFile::getAll()
 {
 	return this->entitati;
 }
@@ -37,14 +37,25 @@ Entitate* RepoFile::getEntitate(int pos)
 	return new Entitate();
 }
 
-void RepoFile::addEntitate(Entitate* e)
+void RepoFile::addEntitate(Entitate* e) throw(ValidationException)
 {
-	//this->entitati.push_back(e->clone());
-	this->entitati.push_front(e->clone());
+	if (typeid(e) == typeid(Animal)) {
+		this->va.validate(e);
+	}
+	if (typeid(e) == typeid(Produs)) {
+		this->vp.validate(e);
+	}
+	this->entitati.push_back(e->clone());
 }
 
 void RepoFile::updateEntitate(Entitate* entitateVeche, Entitate* entitateNoua)
 {
+	if (typeid(entitateNoua) == typeid(Animal)) {
+		this->va.validate(entitateNoua);
+	}
+	if (typeid(entitateNoua) == typeid(Produs)) {
+		this->vp.validate(entitateNoua);
+	}
 	for (int i = 0; i < this->entitati.size(); i++)
 	{
 		if (*(this->getEntitate(i)) == *entitateVeche)
@@ -67,6 +78,28 @@ void RepoFile::deleteEntitate(Entitate* e)
 			return;
 		}
 	}
+}
+
+int RepoFile::findByName(string name)
+{
+	for (int i = 0; i < this->entitati.size(); i++) {
+		if (this->entitati[i]->getNume() == name) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+int RepoFile::findByCod(string cod)
+{
+	for (int i = 0; i < this->entitati.size(); i++) {
+		if (this->entitati[i]->getCod() == cod) {
+			return i;
+		}
+	}
+
+	return -1;
 }
 
 void RepoFile::emptyRepo()
